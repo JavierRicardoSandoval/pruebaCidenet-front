@@ -1,0 +1,19 @@
+.tam-dialog{
+    min-width: 45rem !important;
+}
+
+.pass {
+    background-color: #198754;
+}
+
+.rejected {
+    background-color: #dc3545;
+}
+
+.waiting {
+    background-color: #6c757d;
+}
+
+.width-100 .mat-form-field {
+    width: 100% !important;
+}

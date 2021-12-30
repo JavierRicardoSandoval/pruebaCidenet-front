@@ -1,0 +1,136 @@
+<div class="container-fluid tam-dialog">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-center">Registrar Empleado</h1>
+        </div>
+    </div>
+    <form [formGroup]="formEmployee">
+        <div class="row">
+            <div class="col-6">
+                <!--<div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Primer nombre" aria-label="Primer nombre" formControlName="firstName">
+                    <mat-error [hidden]="!formEmployee.controls['firstName'].hasError('required')" *ngIf="formEmployee.controls['firstName'].hasError('required')"> ¡Advertencia! Este campo es requerido </mat-error>
+                    <input type="text" class="form-control" placeholder="Segundo nombre" aria-label="Segundo nombre" formControlName="secondName">
+                </div>-->
+                <mat-form-field class="example-full-width me-1" appearance="fill">
+                    <mat-label>Primer nombre</mat-label>
+                    <input matInput aria-label="Primer nombre" formControlName="firstName">
+                    <mat-error *ngIf="formEmployee.controls['firstName'].hasError('required')"> ¡Advertencia! Este campo es requerido </mat-error>
+                    <mat-error *ngIf="formEmployee.controls['firstName'].hasError('pattern')"> ¡Advertencia! Solo permite letras.</mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Segundo nombre</mat-label>
+                    <input matInput aria-label="Segundo nombre" formControlName="secondName">
+                    <mat-error *ngIf="formEmployee.controls['secondName'].hasError('pattern')"> ¡Advertencia! Solo permite letras.</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <!--<div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Primer apellido" aria-label="Primer apellido" formControlName="firstLastName">
+                    <input type="text" class="form-control" placeholder="Segundo apellido" aria-label="Segundo apellido" formControlName="secondLastName">
+                </div>-->
+                <mat-form-field class="example-full-width me-1" appearance="fill">
+                    <mat-label>Primer apellido</mat-label>
+                    <input matInput aria-label="Primer apellido" formControlName="firstLastName">
+                    <mat-error *ngIf="formEmployee.controls['firstLastName'].hasError('required')"> ¡Advertencia! Este campo es requerido </mat-error>
+                    <mat-error *ngIf="formEmployee.controls['firstLastName'].hasError('pattern')">¡Advertencia! Solo permite letras.</mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Segundo apellido</mat-label>
+                    <input matInput aria-label="Primer apellido" formControlName="secondLastName">
+                    <mat-error *ngIf="formEmployee.controls['secondLastName'].hasError('required')"> ¡Advertencia! Este campo es requerido </mat-error>
+                    <mat-error *ngIf="formEmployee.controls['secondLastName'].hasError('pattern')">¡Advertencia! Solo permite letras.</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 width-100">
+                <!--<div class="input-group mb-3">
+                    <select class="form-select" aria-label="Tipo de identificación" formControlName="typeId">
+                        <option *ngFor="let op of typesId" [value]="op.id">{{op.name}}</option>
+                    </select>
+                </div>-->
+                <mat-form-field class="width-100" appearance="fill">
+                    <mat-label>Tipo de identificación</mat-label>
+                    <mat-select aria-label="Tipo de identificación" formControlName="typeId">
+                      <mat-option *ngFor="let op of typesId" [value]="op.id">
+                        {{op.name}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6 width-100">
+                <mat-form-field class="width-100" appearance="fill">
+                    <mat-label>Número de identificación</mat-label>
+                    <input matInput aria-label="id" formControlName="id">
+                    <mat-error *ngIf="formEmployee.controls['secondLastName'].hasError('pattern')">¡Advertencia! Solo permite letras y números.</mat-error>
+                </mat-form-field>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 width-100">
+                <!--<div class="input-group mb-3">
+                    <select class="form-select" aria-label="País de contratación" formControlName="countryId">
+                        <option selected>País de contratación</option>
+                        <option value="1">Colombia</option>
+                        <option value="2">Estados Unidos</option>
+                    </select>
+                </div>-->
+                <mat-form-field class="width-100" appearance="fill">
+                    <mat-label>País de contratación</mat-label>
+                    <mat-select aria-label="País de contratación" formControlName="countryId">
+                        <mat-option selected value="1">Colombia</mat-option>
+                        <mat-option value="2">Estados Unidos</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6 width-100">
+                <mat-form-field class="width-100" appearance="fill">
+                    <mat-label>Área de negocio</mat-label>
+                    <mat-select aria-label="País de contratación" formControlName="areaId">
+                        <mat-option *ngFor="let op of areas" [value]="op.id">{{op.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!--<div class="input-group mb-3">
+                    <select class="form-select" aria-label="Area" formControlName="areaId">
+                        <option *ngFor="let op of areas" [value]="op.id">{{op.name}}</option>
+                    </select>
+                </div>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <mat-chip-list *ngIf="emailOk === true" #chipList class="me-1">
+                        <mat-chip [class]="emailOk === true ? 'pass' : emailOk === false ? 'rejected' : 'waiting'">
+                            <mat-icon aria-hidden="false" class="text-white">done</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                    <button *ngIf="emailOk === false" mat-raised-button class="bg-danger" (click)="resolveEmail()" title="Click para buscar alternativa">
+                        <mat-icon aria-hidden="false" class="text-white">error</mat-icon>
+                        <mat-label class="text-white ms-1">click</mat-label>
+                    </button>
+                    <input type="text" class="form-control text-end" [value]="possibleEmail" aria-label="Recipient's username" disabled readonly>
+                    <span class="input-group-text" id="basic-addon2">{{domain}}</span>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="Activo" aria-label="Activo" disabled readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-error *ngIf="emailOk != true">¡Advertencia! Esa combinación de correo electrónico no esta disponible. Click en el botón para encontrar una.</mat-error>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 text-center">
+                <button *ngIf="emailOk === true" mat-raised-button color="primary" [disabled]="formEmployee.invalid" (click)="onSubmit()">Registar empleado</button>
+            </div>
+        </div>
+    </form>
+</div>
